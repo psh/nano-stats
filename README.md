@@ -2,7 +2,7 @@
 Calculate Nanowrimo Stats for the St Louis Region
 
 ## Stats
-There are 2 options.  The default (either ```./stats``` or ```./stats --human```) 
+There are 2 options.  The default is human readable - run it either as ```./stats``` or ```./stats --human```. 
 ```
 > ./stats --human
 
