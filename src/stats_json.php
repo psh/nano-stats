@@ -1,4 +1,5 @@
 <?php
+require('rank_code.php');
 
 /**
  * @param $word
@@ -27,14 +28,14 @@ function processAsJson($word, $name, $size, $halo, $cash)
 
         if ($replace) {
             $daily = $index > 0 ? $word - $data->aaData[$index - 1][2] : intval($word);
-            $r = $index > 0 ? $data->aaData[$index][3] : 0;
+            $r = get_rank(); // $index > 0 ? $data->aaData[$index][3] : 0;
             $data->aaData[$index] = array(
                 $now, intval($daily), intval($word), $r, intval($size), "$" . $cash, intval($halo)
             );
         } else {
             $index = count($data->aaData) - 1;
             $daily = $index > 0 ? $word - $data->aaData[$index][2] : intval($word);
-            $r = $index > 0 ? $data->aaData[$index][3] : 0;
+            $r = get_rank(); // $index > 0 ? $data->aaData[$index][3] : 0;
             $data->aaData[] = array(
                 $now, intval($daily), intval($word), $r, intval($size), "$" . $cash, intval($halo)
             );
@@ -42,9 +43,9 @@ function processAsJson($word, $name, $size, $halo, $cash)
     } else {
         $data = Array("aaData" =>
             array(
-                $now, intval($word), intval($word), 0, intval($size), "$" . $cash, intval($halo)
+                $now, intval($word), intval($word), get_rank(), intval($size), "$" . $cash, intval($halo)
             )
         );
     }
-    echo "FILE: \n" . json_encode($data, JSON_PRETTY_PRINT) . "\n";
+    echo json_encode($data, JSON_PRETTY_PRINT) . "\n";
 }
